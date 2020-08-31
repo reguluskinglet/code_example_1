@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mapdemo-ingress
+  namespace: gis
+  labels:
+    app: mapdemo
+spec:
+  rules:
+  - host: mapdemo.gis.dev.sac.sphaera.cloud
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: mapdemo-service
+          servicePort: 3000

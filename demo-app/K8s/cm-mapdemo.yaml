@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-mapdemo
+  namespace: gis
+data:
+  BACKEND_ADDR: "http://api.gis.dev.sac.sphaera.cloud"
+

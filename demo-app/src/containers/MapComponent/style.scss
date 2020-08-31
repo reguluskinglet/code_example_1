@@ -1,0 +1,102 @@
+#printGisMap {
+  display: none;
+}
+
+@media print {
+  body * {
+    display: none;
+  }
+
+  #printMapContainer {
+    display: block;
+
+    sup {
+      position: absolute;
+      right: 2px;
+      top: 10px;
+    }
+  }
+  #printMapContainer * {
+    display: block;
+  }
+
+  .ol-zoom, .ol-full-screen, .ol-scale-line, .ol-zoomslider {
+    display: none !important;
+  }
+}
+
+.gis-label {
+  position: absolute;
+  top: -15px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.gis-btn {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  color: #4a90e2 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.gis-icon-btn {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 50% !important;
+  padding-right: 0 !important;
+  line-height: 32px !important;
+
+  span {
+    padding-left: 5px;
+  }
+}
+
+.gis-icon-only-btn {
+  background-color: #ffffff !important;
+  border-color: #ffffff !important;
+  background-repeat: no-repeat !important;
+  background-position: 50% 50% !important;
+
+  span {
+    padding-left: 5px;
+  }
+}
+
+.gis-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #979797;
+    border: 0 none #ffffff;
+    border-radius: 34px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #979797;
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background: #979797;
+  }
+  &::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: 0 none #ffffff;
+    border-radius: 34px;
+  }
+  &::-webkit-scrollbar-track:hover {
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-track:active {
+    background: #ffffff;
+  }
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}

@@ -1,0 +1,91 @@
+#map-card {
+  position: relative;
+  z-index: 100;
+  min-width: 100px;
+  min-height: 50px;
+  display: none;
+  visibility: hidden;
+
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+  .header {
+    height: 28px;
+    padding-left: 10px;
+    padding-right: 25px;
+    line-height: 28px;
+    font-weight: bold;
+    background-color: #f3f7fa;
+    border-bottom: 1px solid #dcdee0;
+
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .content {
+    overflow-y: auto;
+
+    .report-card {
+      white-space: pre;
+    }
+
+    .title {
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .value {
+      font-weight: bold;
+      margin-bottom: 10px;
+      word-break: break-all;
+    }
+  }
+
+  .content-wrapper {
+    padding: 10px;
+  }
+
+  .ol-popup-closer {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    height: 13px;
+    z-index: 1;
+    text-decoration: none;
+
+    &:after {
+      content: url('../images/panel-close.png');
+    }
+  }
+
+
+  &:after, &:before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  &:after {
+    border-top-color: white;
+    border-width: 10px;
+    left: 50%;
+    margin-left: -10px;
+  }
+
+  &:before {
+    border-top-color: #cccccc;
+    border-width: 11px;
+    left: 50%;
+    margin-left: -11px;
+  }
+}
+
+.ol-overlay-container #map-card {
+  display: block;
+}

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mapdemo-deployment
+  namespace: gis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mapdemo
+  template:
+    metadata:
+      labels:
+        app: mapdemo
+    spec:
+      containers:
+      - name: mapdemo
+        envFrom:
+          - configMapRef:
+              name: cm-mapdemo
+        image: kubelab.ru/gis/web_client/map_component:latest
+        ports:
+        - containerPort: 3000
+          name: http
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: kubelab.ru-secret
+

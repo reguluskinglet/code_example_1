@@ -1,0 +1,27 @@
+.gis-measure-panel {
+  position: absolute;
+  top: 50px;
+  width: 40px;
+  height: 120px;
+  z-index: 201;
+
+  &.off {
+    display: none;
+  }
+}
+
+.gis-measure-tooltip {
+  padding: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #000000;
+  max-width: 300px;
+  border-radius: 3px;
+  /*box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);*/
+  background-color: #ffffff;
+  opacity: 0.75;
+}

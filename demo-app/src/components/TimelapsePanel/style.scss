@@ -1,0 +1,359 @@
+.gis-timelapse-panel {
+  position: absolute;
+  right: 50%;
+  bottom: 10px;
+  width: 320px;
+  height: 103px;
+  margin-right: -160px;
+  padding: 10px;
+  z-index: 99;
+
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+  &.off {
+    display: none;
+  }
+
+
+  .time {
+    min-height: 18px;
+    text-align: center;
+    margin-top: -6px;
+    margin-bottom: 2px;
+
+    .min {
+      font-size: 11px;
+      color: #525b66;
+      position: absolute;
+      left: 10px;
+      top: 8px;
+      text-align: left;
+    }
+    .current {
+      font-weight: bold;
+      font-size: 12px;
+      display: inline-block;
+    }
+    .max {
+      font-size: 11px;
+      color: #525b66;
+      position: absolute;
+      right: 10px;
+      top: 8px;
+      text-align: right;
+    }
+  }
+
+  .rc-slider {
+    .rc-slider-rail {
+      background-color: rgba(82, 91, 102, 0.1);
+      height: 10px;
+    }
+    .rc-slider-track {
+      background-color: rgba(82, 91, 102, 0.5);
+      height: 10px;
+    }
+    .rc-slider-handle {
+      background-color: #525b66;
+      border: #525b66;
+      border-radius: 7px;
+      margin-top: -2px;
+    }
+  }
+
+  .actions {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    height: 16px;
+
+    .gis-panel {
+      position: absolute;
+      bottom: 29px;
+      background: #fff;
+      text-align: center;
+
+      -webkit-transition:all 1s ease;
+      -moz-transition:all 1s ease;
+      -ms-transition:all 1s ease;
+      -o-transition:all 1s ease;
+      transition:all 1s ease;
+      height: 0px;
+      overflow: hidden;
+
+      &.visible {
+        &.gis-time-speed-panel {
+          height: 157px;
+        }
+        &.gis-settings-panel {
+          height: 115px;
+        }
+      }
+
+      ul {
+        list-style: none;
+        margin: 5px;
+        padding: 0;
+
+        li {
+          cursor: pointer;
+
+          &:hover, &.active {
+            color: #156fd6;
+          }
+        }
+      }
+
+      &.gis-time-speed-panel {
+        left: 0;
+      }
+      &.gis-settings-panel {
+        right: 0;
+        min-width: 35px;
+      }
+    }
+
+    .gis-speed-value {
+      position: absolute;
+      bottom: 11px;
+      left: 11px;
+      font-size: 11px;
+      color: #525b66;
+    }
+
+    a {
+      display: inline-block;
+      font-size: 14px;
+      color: #000000;
+      text-decoration: none;
+      position: absolute;
+      margin: 1px 6px 1px 1px;
+
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+
+        svg {
+          margin-left: -8px;
+        }
+
+        &:hover {
+          svg path, svg rect {
+            fill: #156fd6;
+          }
+        }
+      }
+
+      &.active {
+        svg path, svg rect {
+          fill: #156fd6;
+        }
+      }
+
+      &.gis-speed-minus {
+        left: 9px;
+
+        svg {
+          margin-left: -10px;
+        }
+      }
+      &.gis-speed-plus {
+        left: 25px;
+
+        svg {
+          margin-left: -10px;
+        }
+      }
+      &.gis-speed-minus, &.gis-speed-plus {
+        margin: 0;
+
+        span {
+          width: 24px;
+          height: 24px;
+        }
+
+        &.disabled {
+          cursor: default;
+
+          svg path {
+            fill: gray;
+          }
+        }
+      }
+
+      &.gis-time-speed {
+        left: 12px;
+      }
+
+      &.gis-start {
+        left: 61px;
+      }
+
+      &.gis-backward {
+        left: 103px;
+      }
+
+      &.gis-play, &.gis-stop {
+        left: 154px;
+      }
+
+      &.gis-forward {
+        left: 204px;
+      }
+
+      &.gis-end {
+        left: 241px;
+      }
+
+      &.gis-settings {
+        left: 292px;
+      }
+    }
+  }
+}
+
+.gis-timelapse-settings-panel {
+  position: absolute;
+  right: 50%;
+  bottom: 118px;
+  width: 320px;
+  margin-right: -160px;
+  z-index: 99;
+
+  background: rgba(255, 255, 255, 1);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+  -webkit-transition:all 1s ease;
+  -moz-transition:all 1s ease;
+  -ms-transition:all 1s ease;
+  -o-transition:all 1s ease;
+  transition:all 1s ease;
+
+  &.off {
+    height: 0;
+    overflow: hidden;
+  }
+  &.visible {
+    height: 330px;
+    overflow: hidden;
+  }
+  &.visible2 {
+    overflow: visible;
+  }
+
+  .header {
+    height: 41px;
+    line-height: 41px;
+    background-color: #f3f7fa;
+    border-bottom: 1px solid rgba(82, 91, 102, 0.2);
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    padding: 0 12px;
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      top: 2px;
+      right: 12px;
+      height: 13px;
+      z-index: 1;
+      text-decoration: none;
+
+      &:after {
+        content: url('../images/panel-close.png');
+      }
+    }
+  }
+
+  .content {
+    padding: 11px 12px 0 12px;
+
+    .param {
+      margin-bottom: 19px;
+
+      .param-name {
+        font-size: 14px;
+        font-weight: bold;
+        padding-bottom: 4px;
+        color: #000000;
+      }
+
+      .param-date {
+        position: relative;
+        width: 143px;
+        display: inline-block;
+
+        input {
+          width: 143px;
+        }
+      }
+      .param-date-btn {
+        cursor: pointer;
+        position: absolute;
+        height: 19px;
+        width: 30px;
+        top: 8px;
+        right: 8px;
+        border-left: 1px solid rgba(82, 91, 102, 0.3);
+        background: url('../../icons/ico_calendar.png') 100% 50% no-repeat;
+      }
+      .param-time {
+        width: 143px;
+        margin-left: 10px;
+        text-align: center;
+      }
+
+      .react-datepicker {
+        font-weight: normal;
+      }
+
+      input[type='text'] {
+        border-radius: 3px;
+        border: solid 1px rgba(82, 91, 102, 0.3);
+        padding: 6px 11px;
+        color: #333333;
+      }
+    }
+
+    .reset {
+      color: #156fd6;
+      float: right;
+    }
+  }
+
+  .footer {
+    border-top: 1px solid rgba(82, 91, 102, 0.2);
+    position: relative;
+    height: 38px;
+
+    .delimiter {
+      position: absolute;
+      left: 50%;
+      top: 4px;
+      border-right: 1px solid rgba(82, 91, 102, 0.2);
+      width: 1px;
+      height: 30px;
+    }
+    .ok-btn, .cancel-btn {
+      color: #333333;
+      font-size: 14px;
+      text-align: center;
+      display: inline-block;
+      width: 160px;
+      height: 38px;
+      line-height: 38px;
+
+      &:hover {
+        color: #156fd6;
+      }
+    }
+  }
+}

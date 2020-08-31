@@ -1,0 +1,199 @@
+.layers-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  width: 230px;
+  z-index: 101;
+
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+  &.off {
+    display: none;
+  }
+
+  .header, .footer, .content {
+    background: white;
+    border: none;
+  }
+
+  .header {
+    height: 40px;
+    line-height: 41px;
+    font-weight: bold;
+
+    padding: 0 0 0 10px;
+
+    .resetLayersBtn {
+      height: 26px;
+      position: absolute;
+      right: 32px;
+      top: 7px;
+      cursor: pointer;
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      top: 14px;
+      right: 12px;
+      background: url('../../images/panel-close.png') no-repeat 50% 50%;
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  .content {
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+
+
+  .react-checkbox-tree {
+    ol ol {
+      padding-left: 48px;
+    }
+
+    & > ol > li > .rct-text {
+      & > .rct-collapse-btn {
+        position: absolute;
+        right: 5px;
+        margin-top: 1px;
+      }
+    }
+
+    & > ol {
+      padding-left: 0;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      & > li > ol {
+        padding-left: 0;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+    }
+
+    font-size: 13px;
+    line-height: 24px;
+
+    & > ol {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      & > li {
+        & > .rct-text {
+          background-color: rgba(82, 91, 102, 0.1);
+          padding: 3px 0 3px 5px;
+          font-weight: bold;
+          font-size: 14px;
+
+          & > .rct-collapse-btn {
+            position: absolute;
+            right: 5px;
+          }
+        }
+      }
+    }
+
+    li.baseLayers > .rct-text > label {
+      cursor: default;
+
+      & > .rct-checkbox {
+        display: none;
+      }
+      & > .rct-title {
+        padding-left: 5px;
+      }
+    }
+
+    .reportLayer {
+      padding-left: 0 !important;
+    }
+
+    li.active > span > label {
+      font-weight: bold;
+    }
+
+
+    label:hover {
+      background: none;
+    }
+
+    .rct-checkbox {
+      position: absolute;
+      font-size: 18px;
+    }
+    .rct-title {
+      color: #525b66;
+      padding-left: 29px;
+      display: block;
+    }
+
+    .rct-node-leaf {
+      padding-left: 5px;
+
+      .rct-collapse {
+        display: none;
+      }
+    }
+
+
+    .rct-icon::before {
+      content: none;
+    }
+
+    .rct-icon {
+      width: 16px;
+      height: 16px;
+    }
+    .rct-icon-check {
+      background: url('images/checked.png') no-repeat 50% 50%;
+      margin-top: 4px;
+    }
+    .rct-icon-uncheck {
+      background: url('images/unchecked.png') no-repeat 50% 50%;
+      margin-top: 4px;
+    }
+    .rct-icon-half-check {
+      background: url('images/halfchecked.png') no-repeat 50% 50%;
+      margin-top: 4px;
+    }
+    .rct-icon-expand-close {
+      background: url('images/expand-close.png') no-repeat 50% 50%;
+      margin-left: 4px;
+      opacity: 1;
+    }
+    .rct-icon-expand-open {
+      background: url('images/expand-open.png') no-repeat 50% 50%;
+      margin-left: 4px;
+    }
+
+
+    .layers, .baseLayers, .extraLayers {
+      & > .rct-text {
+        .rct-icon-expand-close {
+          background: url('images/root-expand-close.png') no-repeat 50% 50%;
+        }
+        .rct-icon-expand-open {
+          background: url('images/root-expand-open.png') no-repeat 50% 50%;
+        }
+      }
+    }
+
+    .baseLayers {
+      .rct-icon-check {
+        background: url('images/radio-checked.png') no-repeat 50% 50%;
+      }
+      .rct-icon-uncheck {
+        background: url('images/radio-unchecked.png') no-repeat 50% 50%;
+      }
+    }
+  }
+}

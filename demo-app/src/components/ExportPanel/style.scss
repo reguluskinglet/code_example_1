@@ -1,0 +1,26 @@
+.gis-export-panel {
+  position: absolute;
+  top: 50px;
+  width: 40px;
+  height: 120px;
+  z-index: 201;
+
+  &.off {
+    display: none;
+  }
+
+  .gis-map-button {
+    width: 40px;
+    text-align: center;
+  }
+
+  .png-export {
+
+  }
+  .jpg-export {
+    margin-top: 5px;
+  }
+  .pdf-export {
+    margin-top: 5px;
+  }
+}

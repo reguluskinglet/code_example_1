@@ -1,0 +1,34 @@
+image: docker:stable
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_DRIVER: overlay2
+  REGISTRY_IMAGE: $DR_ADDR/gis/web_client/map_component
+
+before_script:
+  - docker login -u $DR_USER -p $DR_PASS $DR_ADDR
+
+build_master:
+  stage: build
+  tags:
+    - gis
+  script:
+    - docker pull $REGISTRY_IMAGE:latest || true
+    - docker build --pull --cache-from $REGISTRY_IMAGE:latest -t $REGISTRY_IMAGE:latest .
+    - docker push $REGISTRY_IMAGE:latest
+  only:
+    - master
+
+build_branches:
+  stage: build
+  tags:
+    - gis
+  script:
+    - docker pull $REGISTRY_IMAGE:$CI_COMMIT_REF_NAME || true
+    - docker build --pull --cache-from $REGISTRY_IMAGE:$CI_COMMIT_REF_NAME -t $REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker push $REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  except:
+    - master

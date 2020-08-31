@@ -1,0 +1,110 @@
+.gis-map-search {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  width: 300px;
+
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+
+  &.results {
+    bottom: 45px;
+
+    .gis-map-search-panel {
+      display: block;
+    }
+  }
+
+  .gis-map-search-input {
+    input {
+      width: 100%;
+      border: none;
+      padding: 9px 40px 10px 15px;
+    }
+
+    i.reset {
+      background: url('../images/panel-close.png') no-repeat 50% 50%;
+      position: absolute;
+      right: 32px;
+      top: 0;
+      height: 40px;
+      width: 32px;
+      display: inline-block;
+      cursor: pointer;
+    }
+    i.search {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      height: 32px;
+      width: 32px;
+      display: inline-block;
+      cursor: pointer;
+
+      &:hover {
+        svg path {
+          fill: #156fd6;
+        }
+      }
+    }
+  }
+
+  .gis-map-search-panel {
+    display: none;
+
+    overflow-y: scroll;
+
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
+
+    .gis-map-search-providers {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      .gis-map-search-results-provider-name {
+        font-weight: bold;
+      }
+      .gis-map-search-processing {
+
+      }
+      .gis-map-search-processing {
+
+      }
+
+      li {
+        padding: 11px 0 11px 15px;
+        border-top: 1px solid #525b66;
+      }
+    }
+
+    .gis-map-search-provider-coordinates .gis-map-search-results li {
+      border: none;
+    }
+
+    .gis-map-search-results {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        padding: 11px 0 11px 0;
+        border-top: 1px solid #525b66;
+        cursor: pointer;
+
+        &.selected {
+          color: #4a90e2;
+        }
+      }
+    }
+  }
+}
+
+.fixed .gis-map-search {
+  width: 220px;
+}

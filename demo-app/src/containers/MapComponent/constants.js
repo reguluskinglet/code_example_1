@@ -1,0 +1,4 @@
+export const LOAD_LAYERS = 'GIS/GisApp/LOAD_LAYERS';
+export const LOAD_LAYERS_SUCCESS = 'GIS/GisApp/LOAD_LAYERS_SUCCESS';
+export const LOAD_LAYERS_ERROR = 'GIS/GisApp/LOAD_LAYERS_ERROR';
+export const CHANGE_LAYERS = 'GIS/GisApp/CHANGE_LAYERS';
