@@ -1,0 +1,8 @@
+.pytest_cache/
+venv/
+.idea/
+simple_config.ini
+.git/
+__pycache__/
+
+

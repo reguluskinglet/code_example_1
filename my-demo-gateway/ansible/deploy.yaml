@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: include common role
+    include_role:
+      name: common
+
+  - name: include k8s-microservice role
+    include_role:
+      name: "k8s-microservice"

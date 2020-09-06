@@ -1,0 +1,9 @@
+---
+gitlab:
+  project: "{{ lookup('env', 'PROJECT_NAME') }}"
+  branch: "{{ lookup('env','CI_COMMIT_REF_NAME') }}"
+  job: "{{ lookup('env', 'CI_JOB_NAME') }}"
+k8s:
+  context: "{{ ['demo@cluster.local'] if gitlab.branch is match('release_*') else ['dc01.local', 'dc02.local'] }}"
+  namespace: "{% if 'release' in gitlab.branch %}release{% elif gitlab.branch == 'master' %}master{% else %}{{ gitlab.branch }}{% endif %}"
+  state: "{{ 'present' if gitlab.job is match('start environment') else 'absent' }}"

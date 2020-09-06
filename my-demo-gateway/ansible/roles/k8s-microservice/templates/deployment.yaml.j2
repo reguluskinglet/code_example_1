@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: "{{ k8s.name }}"
+  name: "{{ k8s.name }}"
+spec:
+  replicas: {{ k8s.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ k8s.name }}"
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: "{{ k8s.name }}"
+    spec:
+      containers:
+      - name: "{{ k8s.name }}"
+        image: "{{ k8s.image }}"
+        env:
+        - name: demo_Host
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        envFrom:
+        - configMapRef:
+            name: {{ k8s.name }}
+        resources:
+          requests:
+            memory: {{ k8s.requests.memory }}
+            cpu: {{ k8s.requests.cpu }}
+          limits:
+            memory: {{ k8s.limits.memory }}
+            cpu: {{ k8s.limits.cpu }}
+            ephemeral-storage: {{ k8s.limits.ephemeral_storage}}
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 3
+        ports:
+        - name: {{ k8s.port.name }}
+          containerPort: {{ k8s.port.value }}
+          protocol: "{{ k8s.protocol }}"
+        volumeMounts:
+        - name: time
+          mountPath: /etc/localtime
+      volumes:
+      - name: time
+        hostPath:
+          path: /etc/localtime
+          type: ""

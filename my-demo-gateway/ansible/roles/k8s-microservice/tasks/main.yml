@@ -1,0 +1,93 @@
+---
+#
+- name: apply configmap
+  k8s:
+    definition: "{{ lookup('template', 'configmap.yaml.j2') }}"
+    state: "{{ k8s.state }}"
+    namespace: "{{ k8s.namespace }}"
+    context: "{{ item }}"
+    validate:
+      fail_on_error: yes
+  loop: "{{ k8s.context }}"
+
+- name: apply deployment
+  k8s:
+    definition: "{{ lookup('template', 'deployment.yaml.j2') }}"
+    state: "{{ k8s.state }}"
+    namespace: "{{ k8s.namespace }}"
+    context: "{{ item }}"
+    validate:
+      fail_on_error: yes
+  loop: "{{ k8s.context }}"
+
+- name: apply service
+  k8s:
+    definition: "{{ lookup('template', 'service.yaml.j2') }}"
+    state: "{{ k8s.state }}"
+    namespace: "{{ k8s.namespace }}"
+    context: "{{ item }}"
+    validate:
+      fail_on_error: yes
+  loop: "{{ k8s.context }}"
+
+- name: apply Ingress on stage
+  k8s:
+    definition:
+      apiVersion: networking.k8s.io/v1beta1
+      kind: Ingress
+      metadata:
+        namespace: "{{ k8s.namespace }}"
+        name: "{{ k8s.name }}"
+        labels:
+          app: "{{ k8s.name }}"
+      spec:
+        rules:
+        - host: "{{ item.value.url }}"
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "{{ k8s.name }}"
+                servicePort: 80
+    context: "{{ item.value.context }}"
+    state: "{{ k8s.state }}"
+    validate:
+      fail_on_error: yes
+  loop: "{{ stage_ingress | dict2items }}"
+  when: "k8s.namespace != 'release'"
+
+- name: apply Ingress on release
+  k8s:
+    definition:
+      apiVersion: networking.k8s.io/v1beta1
+      kind: Ingress
+      metadata:
+        namespace: "{{ k8s.namespace }}"
+        name: "{{ k8s.name }}"
+        labels:
+          app: "{{ k8s.name }}"
+      spec:
+        rules:
+        - host: "{{ item.value.url }}"
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "{{ k8s.name }}"
+                servicePort: 80
+    context: "{{ item.value.context }}"
+    state: "{{ k8s.state }}"
+    validate:
+      fail_on_error: yes
+  loop: "{{ release_ingress | dict2items }}"
+  when: "k8s.namespace == 'release'"
+
+- name: apply monitor
+  k8s:
+    definition: "{{ lookup('template', 'monitor.yaml.j2') }}"
+    state: "{{ k8s.state }}"
+    namespace: "{{ k8s.namespace }}"
+    context: "{{ item }}"
+    validate:
+      fail_on_error: yes
+  loop: "{{ k8s.context }}"

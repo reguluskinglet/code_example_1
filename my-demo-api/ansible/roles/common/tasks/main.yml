@@ -1,0 +1,10 @@
+---
+- name: apply namespace
+  k8s:
+    name: "{{ k8s.namespace }}"
+    kind: Namespace
+    state: "{{ k8s.state }}"
+    context: "{{ item }}"
+    wait: yes
+  loop: "{{ k8s.context }}"
+  when: "k8s.state == 'present'"

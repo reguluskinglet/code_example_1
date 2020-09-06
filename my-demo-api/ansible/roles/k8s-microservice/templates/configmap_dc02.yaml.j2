@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ k8s.name }}"
+  labels:
+    app: "{{ k8s.name }}"
+data:
+  ConnectionStrings__DatabaseConnection: "{{ service.con_string }}"
+  JaegerTracingOptions__JaegerAgentHost: "jaeger"
+  JaegerTracingOptions__JaegerAgentPort: "6831"
+  TransitSettings__RabbitMqAddress: "rabbitmq:5672"
+  TransitSettings__RabbitMqUsername: "guest"
+  TransitSettings__RabbitMqPassword: "guest"
+  ServicesOptions__GisFacadeClientOptions__Url: "http://{{ k8s.namespace }}.dc01.gis-facade.stage.demo.ru"
+  ServicesOptions__IndexServiceOptions__Url: "http://index-service"
+  ServicesOptions__ContactManagementServiceOptions__Url: "http://contact-management"
+  ServicesOptions__CallManagementServiceClientOptions__Url: "http://call-management"
+  ServicesOptions__InboxDistributionServiceOptions__Url: "http://inbox-distribution"
+  ServicesOptions__UserManagementServiceOptions__Url: "http://user-management"
+  RedisOptions__Configuration: "redis:6379"
+  LoggerOptions__MinLogLevel: "{{ service.min_log_level }}"
+  RegulatoryTimeZon__Yellow: "00:00:8"
+  RegulatoryTimeZon__Red: "00:00:11"
+  demo_Environment: "{{ k8s.namespace }}"
+  demo_Version: "{{ image.version }}"

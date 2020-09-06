@@ -1,0 +1,467 @@
+﻿{
+  "version": "1",
+  "card": {
+    "id": "81fa8ce9-e2e6-0001-0000-000000000000",
+    "title": "CaseTemplate.FireDepartment.Card.Title",
+    "blocks": [
+      {
+        "id": "81fa8ce9-e2e6-0001-0001-000000000000",
+        "label": {
+          "text": "CaseTemplate.FireDepartment.Block_1.Label"
+        },
+        "wrapper": {},
+        "fields": [
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000001",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_1.Field_1.Label"
+            },
+            "input": {
+              "type": "textarea",
+              "cssClassName": "card-textarea",
+              "attributes": {
+                "placeholder": "CaseTemplate.FireDepartment.Block_1.Field_1.Input.Placeholder",
+                "description": "Description",
+                "tabIndex": 1
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "81fa8ce9-e2e6-0001-0001-000000000001",
+        "label": {
+          "text": "CaseTemplate.FireDepartment.Block_2.Label"
+        },
+        "wrapper": {
+          "cssClassName": "applicant-fire-department"
+        },
+        "fields": [
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000001",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_1.Label",
+              "cssClassName": "applicant-label align-end"
+            },
+            "wrapper": {
+              "cssClassName": "grid-1-1-1-4"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 15
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000005",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_2.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-1-4-1-8"
+            },
+            "input": {
+              "type": "tooltip",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 0
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000002",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_3.Label",
+              "cssClassName": "applicant-label align-end"
+            },
+            "wrapper": {
+              "cssClassName": "grid-2-1-2-4"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 16
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000006",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_4.Label",
+              "cssClassName": "applicant-label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-2-4-2-8"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 19
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000003",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_5.Label",
+              "cssClassName": "applicant-label align-end"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-1-3-4"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 17
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000007",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_6.Label",
+              "cssClassName": "applicant-label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-4-3-8"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 20
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000004",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_7.Label",
+              "cssClassName": "applicant-label align-end"
+            },
+            "wrapper": {
+              "cssClassName": "grid-4-1-4-3"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 18
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-0000000000011",
+            "label": {
+              "text": "CallToApplicant"
+            },
+            "wrapper": {
+              "cssClassName": "grid-4-3-4-4"
+            },
+            "input": {
+              "type": "button-call-to-applicant",
+              "cssClassName": "applicant-button",
+              "attributes": {
+                "description": "CaseTemplate.FireDepartment.Block_2.Field_8.Input.Description",
+                "tabIndex": 0
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000008",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_2.Field_9.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-4-4-4-6"
+            },
+            "input": {
+              "type": "datetime",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 0
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-000000000009",
+            "label": {
+              "text": "ButtonUserApplicantLocation"
+            },
+            "wrapper": {
+              "cssClassName": "grid-4-6-4-7"
+            },
+            "input": {
+              "type": "button-use-applicant-location",
+              "cssClassName": "applicant-button",
+              "attributes": {
+                "description": "CaseTemplate.FireDepartment.Block_2.Field_10.Input.Description",
+                "tabIndex": 0
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0003-0000000000010",
+            "label": {
+              "text": "ShowApplicantLocationOnMap"
+            },
+            "wrapper": {
+              "cssClassName": "grid-4-7-4-8"
+            },
+            "input": {
+              "type": "button-show-applicant-location-on-map",
+              "cssClassName": "applicant-button",
+              "attributes": {
+                "description": "CaseTemplate.FireDepartment.Block_2.Field_11.Input.Description",
+                "tabIndex": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "81fa8ce9-e2e6-0001-0001-000000000002",
+        "label": {
+          "text": "CaseTemplate.FireDepartment.Block_3.Label"
+        },
+        "wrapper": {
+          "cssClassName": "block-place"
+        },
+        "fields": [
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000006",
+            "wrapper": {
+              "cssClassName": "grid-1-1-1-4"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "placeholder": "CaseTemplate.FireDepartment.Block_3.Field_1.Input.Placeholder",
+                "description": "Description",
+                "tabIndex": 4
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000007",
+            "wrapper": {
+              "cssClassName": "grid-1-4-1-8"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "placeholder": "CaseTemplate.FireDepartment.Block_3.Field_2.Input.Placeholder",
+                "description": "Description",
+                "tabIndex": 5
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000008",
+            "wrapper": {
+              "cssClassName": "grid-2-1-2-4"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "placeholder": "CaseTemplate.FireDepartment.Block_3.Field_3.Input.Placeholder",
+                "description": "Description",
+                "tabIndex": 6
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000009",
+            "wrapper": {
+              "cssClassName": "grid-2-4-2-8"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "placeholder": "CaseTemplate.FireDepartment.Block_3.Field_4.Input.Placeholder",
+                "description": "Description",
+                "tabIndex": 7
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000010",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_5.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-1"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 8
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000011",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_6.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-4-7"
+            },
+            "input": {
+              "type": "button-map",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 0
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000012",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_7.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-2"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 9
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000013",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_8.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-4"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 10
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000014",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_9.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-5"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 11
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000015",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_10.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-3"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 12
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000016",
+            "label": {
+              "text": "CaseTemplate.FireDepartment.Block_3.Field_11.Label"
+            },
+            "wrapper": {
+              "cssClassName": "grid-3-6-3-8"
+            },
+            "input": {
+              "type": "textbox",
+              "attributes": {
+                "description": "Description",
+                "tabIndex": 13
+              }
+            }
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000024",
+            "input": {
+              "type": "location"
+            }
+          }
+        ]
+      },
+      {
+        "id": "81fa8ce9-e2e6-0001-0001-000000000004",
+        "label": {
+          "text": "CaseTemplate.FireDepartment.Block_4.Label"
+        },
+        "wrapper": {},
+        "fields": [
+          {
+            "id": "81fa8ce9-e2e6-0001-0001-000000000023",
+            "input": {
+              "type": "textarea",
+              "cssClassName": "card-textarea",
+              "attributes": {
+                "placeholder": "CaseTemplate.FireDepartment.Block_4.Field_1.Input.Placeholder",
+                "description": "Description",
+                "tabIndex": 14
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "plans": [
+      {
+        "id": "81fa8ce9-e2e6-0001-0101-000000000000",
+        "title": "План реагирования",
+        "instructions": [
+          {
+            "id": "81fa8ce9-e2e6-0001-0101-000000000001",
+            "type": "Text",
+            "title": "Назначить СиС на происшествие"
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0101-000000000002",
+            "type": "GISShowLayer",
+            "title": "Посмотреть расстановку СиС и план тушения пожара",
+            "layerId": "demo:placement"
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0101-000000000003",
+            "type": "Text",
+            "title": "Внести результаты реагирования в карточку",
+            "layerId": "demo:model"
+          },
+          {
+            "id": "81fa8ce9-e2e6-0001-0101-000000000004",
+            "type": "GISHideLayer",
+            "title": "Подтвердить завершение реагирования",
+            "layerId": "demo:placement"
+          }
+        ]
+      }
+    ],
+    "withMarkLocationBlock": true
+  }
+}

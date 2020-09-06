@@ -1,0 +1,55 @@
+---
+# Блок в котором из переменных окружения задаются переменные playbook
+gitlab:
+  project: "{{ lookup('env', 'PROJECT_NAME') }}"
+  branch: "{{ lookup('env','CI_COMMIT_REF_NAME') }}"
+  job: "{{ lookup('env', 'CI_JOB_NAME') }}"
+image:
+  registry: "{{ lookup('env','NEXUS_DOCKER_REGISTRY_PULL') }}"
+  name: "{{ lookup('env', 'IMAGE_NAME') }}"
+  version: "{{ lookup('env', 'VERSION') }}"
+
+# Переменные k8s
+k8s:
+  context: "{{ ['demo@cluster.local'] if gitlab.branch is match('release_*') else ['dc01.local', 'dc02.local'] }}"
+  namespace: "{% if 'release' in gitlab.branch %}release{% elif gitlab.branch == 'master' %}master{% else %}{{ gitlab.branch }}{% endif %}"
+  state: "{{ 'present' if gitlab.job is match('start environment') else 'absent' }}"
+  name: "{{ gitlab.project }}"
+  image: "{{ image.registry }}/{{image.name}}:{{image.version}}"
+  replicas: "2"
+  port:
+    name: "http"
+    value: "80"
+    target: "80"
+  protocol: "TCP"
+  requests:
+    memory: 200Mi
+    cpu: 60m
+  limits:
+    memory: 400Mi
+    cpu: "300m"
+    ephemeral_storage: "100Mi"
+
+# переменные ingress
+url: "{% if 'release' in gitlab.branch %}{{release_ingress}}{% else %}{{stage_ingress}}'{% endif %}"
+domain: "{% if 'release' in gitlab.branch %}xxxx.dev.demo.loc{% else %}stage.demo.ru{% endif %}"
+stage_ingress:
+    dc01:
+      context: "dc01.local"
+      url: "{{ k8s.namespace }}.dc01.{{ k8s.name }}.{{ domain }}"
+    dc02:
+      context: "dc02.local"
+      url: "{{ k8s.namespace }}.dc02.{{ k8s.name }}.{{ domain }}"
+release_ingress:
+  release:
+    release:
+      context: "demo@cluster.local"
+      url: "release.dev.xxxx.demo.cloud"
+    release_local:
+      context: "demo@cluster.local"
+      url: "release.{{ k8s.name }}.xxxx.dev.demo.loc"
+# Переменные сервиса
+service:
+  con_string: "Host=postgresql-db;Database=DemoApi;Username=postgres;Password=123456;"
+  redis: "{% if 'release' in gitlab.branch %}redis-announce-0,redis-announce-1,redis-announce-2{% elif gitlab.branch == 'master' %}redis-announce-0,redis-announce-1,redis-announce-2{% else %}redis:6379{% endif %}"
+  min_log_level: "{% if 'release' in gitlab.branch %}Verbose{% elif gitlab.branch == 'master' %}Verbose{% else %}Debug{% endif %}"

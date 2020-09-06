@@ -1,0 +1,14 @@
+﻿--unique-boundary-1
+Content-Type: application/pidf+xml
+Content-ID: target@10.108.219.210
+
+<?xml version="1.0" encoding="UTF-8"?><presence xmlns="urn:ietf:params:xml:ns:pidf" entity="79277588994" xsi:schemaLocation="urn:ietf:params:xml:ns:pidf presence.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gp="urn:ietf:params:xml:ns:pidf:geopriv10" xmlns:gml="http://www.opengis.net/gml" xmlns:gs="http://www.opengis.net/pidflo/1.0" xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model"><dm:device id="Q6C196E72-B103-453B-B2FF-CFCE563C7C4A"><gp:geopriv><gp:location-info><gml:location><gs:Circle srsName="urn:ogc:def:crs:EPSG::4326"><gml:pos>50.1657 53.1945</gml:pos><gs:radius uom="urn:ogc:def:uom:EPSG::9001">602.0</gs:radius></gs:Circle></gml:location></gp:location-info></gp:geopriv><dm:deviceID>250027032305756</dm:deviceID><dm:timestamp>2020-03-02T10:52:22.604Z</dm:timestamp></dm:device></presence>
+--unique-boundary-1
+Content-Disposition: form-data; name="part"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+FirstLine
+Second Line
+Third Line
+--unique-boundary-1--

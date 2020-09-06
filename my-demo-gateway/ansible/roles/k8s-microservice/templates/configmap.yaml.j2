@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ k8s.name }}"
+  labels:
+    app: "{{ k8s.name }}"
+data:
+  AsteriskOptions__Ip: "{{ service.asterisk.address }}"
+  AsteriskOptions__Port: "{{ service.asterisk.port }}"
+  AsteriskOptions__Username: "{{ service.asterisk.user }}"
+  AsteriskOptions__Password: "{{ service.asterisk.password }}"
+  ConnectionStrings__DemoGatewayDatabaseConnection: "{{ service.con_string }}"
+  JaegerTracingOptions__JaegerAgentHost: "jaeger"
+  JaegerTracingOptions__JaegerAgentPort: "6831"
+  TransitSettings__RabbitMqAddress: "rabbitmq:5672"
+  TransitSettings__RabbitMqUsername: "guest"
+  TransitSettings__RabbitMqPassword: "guest"
+  demo_Environment: "{{ k8s.namespace }}"
+  demo_Version: "{{ image.version }}"

@@ -1,0 +1,139 @@
+workflow:
+  rules:
+  - if: $CI_MERGE_REQUEST_IID
+    when: never
+  - when: always
+
+stages:
+  - tests
+  - analyse
+  - set_tags
+  - publish
+  - deploy
+
+variables:
+  VERSION: "1.0.${CI_PIPELINE_ID}"
+  PROJECT_NAME: demo-api
+  SC_KEY_NAME: xxxx-demo-api
+  KUBECONFIG: /etc/deploy/config
+  IMAGE_NAME: "operator.facade.api"
+
+######## Тесты ##########
+tests:
+  stage: tests
+  image: ${NEXUS_DOCKER_REGISTRY_PULL}/dotnet/core/sdk:3.1
+  tags: [ docker ]
+  rules:
+    - if: '$CI_COMMIT_REF_SLUG =~ /-devops.*/'
+      when: never
+    - when: on_success
+  services:
+    - name: postgres:11.4
+      alias: db
+    - name: redis:5.0.6
+      alias: redis
+  script:
+    - export ConnectionStrings__DatabaseConnection="Host=db;Database=DemoApi_Test;Username=postgres;Password=postgres;"
+    - export RedisOptions__Configuration="redis:6379"
+    - dotnet restore -s ${NUGET_SOURCE_URL} --disable-parallel --no-cache --force-evaluate -v n
+    - dotnet test demo.DemoApi.Service.Tests -c Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+  artifacts:
+    paths:
+      - ./*/*.opencover.xml
+    expire_in: 1 hour
+
+
+########## Анализ кода ##########
+analyse:
+  stage: analyse
+  image: ${NEXUS_DOCKER_REGISTRY_PULL}/emeraldsquad/sonar-scanner-net:3.0.0
+  tags: [ docker ]
+  rules:
+    - if: '$CI_COMMIT_REF_SLUG == "master"'
+      when: always
+  script:
+    - export PATH="$PATH:/root/.dotnet/tools"
+    - dotnet sonarscanner begin /k:'xxxx-demo-api' /n:'${PROJECT_NAME}' /d:sonar.login=${SC_KEY} /d:sonar.host.url=${SC_URL} /d:sonar.cs.opencover.reportsPaths="*/*.opencover.xml"
+    - dotnet restore -s ${NUGET_SOURCE_URL} --disable-parallel --no-cache --force-evaluate -v n
+    - dotnet build
+    - dotnet sonarscanner end /d:sonar.login=${SC_KEY}
+
+
+######### установка тегов ##########
+set tags:
+  stage: set_tags
+  image: ${NEXUS_DOCKER_REGISTRY_PULL}/alpine:latest
+  rules:
+    - if: '$CI_COMMIT_REF_SLUG =~ /-devops.*/'
+      when: never
+    - when: on_success
+  tags: [ docker ]
+  variables:
+    GIT_SSL_NO_VERIFY: "1"
+  before_script:
+    - apk add --no-cache git
+  script:
+    - git remote set-url origin https://${GITLAB_USER}:${GITLAB_PASSWORD}@gitlab.demo.ru/xxxx/proto-cti-service.git
+    - git config --global user.email "gitlab-ci-runner@demo.ru"
+    - git config --global user.name "Gitlab CI Runner"
+    - git tag -a "${VERSION}" -m "Added by Gitlab CI"
+    - git push origin --tags -o ci.skip
+
+
+######### сборка и публикация в докер репу ##########
+build image:
+  stage: publish
+  image: ${NEXUS_DOCKER_REGISTRY_PULL}/docker:${DOCKER_VERSION}
+  tags: [ docker ]
+  services:
+    - name: ${NEXUS_DOCKER_REGISTRY_PULL}/docker:19.03-dind
+      alias: docker
+  before_script:
+    - docker login  ${NEXUS_DOCKER_REGISTRY_PUSH} --username ${NEXUS_USERNAME} --password=${NEXUS_PASSWORD}
+  script:
+    - docker build ./ -t ${NEXUS_DOCKER_REGISTRY_PUSH}/${IMAGE_NAME}:${VERSION}
+    - docker tag ${NEXUS_DOCKER_REGISTRY_PUSH}/${IMAGE_NAME}:${VERSION} ${NEXUS_DOCKER_REGISTRY_PUSH}/${IMAGE_NAME}:$CI_COMMIT_REF_SLUG
+    - docker push ${NEXUS_DOCKER_REGISTRY_PUSH}/${IMAGE_NAME}:${VERSION}
+    - docker push ${NEXUS_DOCKER_REGISTRY_PUSH}/${IMAGE_NAME}:$CI_COMMIT_REF_SLUG
+
+######### Деплой ##########
+start environment:
+  stage: deploy
+  image: ${NEXUS_DOCKER_REGISTRY_PULL}/ansible:1.1
+  tags: [ docker ]
+  rules:
+    - if: '$CI_COMMIT_REF_SLUG == "master"'
+      when: manual
+    - if: '$CI_COMMIT_REF_SLUG =~ /^release.*$/'
+      when: manual
+    - when: on_success
+  script:
+    - chmod 600 ansible/git_ansible
+    - export ANSIBLE_CONFIG=ansible/ansible.cfg LANG=C.UTF-8 K8S_AUTH_KUBECONFIG=config
+    - ansible-playbook ansible/deploy.yaml -i ansible/hosts.ini
+    - 'if [ $CI_COMMIT_REF_NAME != "release.*$" ]; then echo Адрес деплоймента: http://$CI_COMMIT_REF_SLUG.dc01.$PROJECT_NAME.stage.demo.ru; fi'
+    - 'if [ $CI_COMMIT_REF_NAME != "release.*$" ]; then echo Адрес деплоймента: http://$CI_COMMIT_REF_SLUG.dc02.$PROJECT_NAME.stage.demo.ru; fi'
+  dependencies: []
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    on_stop: stop environment
+
+
+############ Удаление окружения ##############
+stop environment:
+  stage: deploy
+  image: ${NEXUS_DOCKER_REGISTRY_PULL}/ansible:1.1
+  tags: [ docker ]
+  rules:
+    - if: '$CI_COMMIT_REF_SLUG == "master" || $CI_COMMIT_REF_SLUG =~ /^release.*$/'
+      when: never
+    - when: manual
+  allow_failure: true
+  script:
+    - chmod 600 ansible/git_ansible
+    - export ANSIBLE_CONFIG=./ansible.cfg LANG=C.UTF-8 K8S_AUTH_KUBECONFIG=config
+    - ansible-playbook ansible/deploy.yaml -i ansible/hosts.ini
+  dependencies: []
+  environment:
+    name: $CI_COMMIT_REF_NAME
+    action: stop
